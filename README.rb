@@ -93,4 +93,112 @@ $ bundle exec rails generate devise user
   create db/migrate/20150228234349_devise_create_users.rb 
   create app/models/user.rb 
   insert app/models/user.rb 
-    route devise_for :users
+  route devise_for :users
+ See GIGN UP & LOG IN pages
+=================== above: 2nd commit  ===================================================== 
+We can also see that Devise has created an entry in the USERS table by going into the database directly. 
+Use the Rails dbconsole command:
+$ bundle exec rails dbconsole 
+shine_development=>  \x on 
+Expanded display is on. 
+shine_development=>  select * from users; 
+-[ RECORD 1 ]----------+-------------------------------------------------------------
+id                     | 1
+email                  | t1@gmail.com
+encrypted_password     | $2a$11$5UCrTn6pY3Ni1I.9ftCjB.tS/1B34WC6gTin10SWiJHnV6VCZw66q
+reset_password_token   | 
+reset_password_sent_at | 
+remember_created_at    | 
+sign_in_count          | 1
+current_sign_in_at     | 2017-03-19 04:06:00.079409
+last_sign_in_at        | 2017-03-19 04:06:00.079409
+current_sign_in_ip     | 118.233.72.58
+last_sign_in_ip        | 118.233.72.58
+created_at             | 2017-03-19 04:06:00.073404
+updated_at             | 2017-03-19 04:06:00.080374
+shine_development=> \q
+------------- Installing Bootstrap with Bower --
+# Bower is going to make our lives easier by giving us clear 
+# and complete control over our front-end assets. 
+$ sudo apt-get update
+$ sudo apt-get install nodejs
+$ sudo apt-get install npm
+$ npm install -g bower
+Edit login/install-bootstrap/shine/Gemfile 
+gem 'bower-rails
+$ bundle install 
+# it allows us to specify dependencies in a simple file called Bowerfile, 
+# which will be easier to work with than the JSON format15 required by the bower 
+# command-line app. Bower-rails also provides rake tasks to run Bower for us. 
+$bundle exec rake -T bower
+rake bower:cache:clean                   # Clear the bower cache ('bower cache clean')
+rake bower:clean                         # Attempt to keep only files listed in 'main' of each component's bower.json
+rake bower:install[options]              # Install components from bower
+rake bower:install:deployment[options]   # Install components from bower using previously generated bower.json
+rake bower:install:development[options]  # Install both dependencies and devDependencies from bower
+rake bower:install:production[options]   # Install only dependencies, excluding devDependencies from bower
+rake bower:list                          # List bower components
+rake bower:resolve[relative_directory]   # Resolve assets paths in bower components
+rake bower:update[options]               # Update bower components
+rake bower:update:prune[options]         # Update existing components and uninstalls extraneous components
+timchen7:~/shine (master) $ 
+
+===================== Download Bootstrap ==========================
+Bower packages are hosted in public git repositories (usually hosted on GitHub) 
+and registered at http://bower.io/search, which is analogous to http://rubygems.org.
+timchen7:~/shine (master) $ bower search bootstrap | head 
+Search results:
+    bootstrap https://github.com/twbs/bootstrap.git
+    bootstrap-bo https://github.com/brentoneill/bootstrap.git
+    x-bootstrap https://github.com/x-element/x-bootstrap.git
+    bootstrap-2 https://github.com/twbs/bootstrap.git
+    bootstrap.ui https://github.com/visionappscz/bootstrap-ui.git
+    bootstrap-dv https://github.com/JKAussieSkater/Bootstrap-DV.git
+    bootstrap-gap https://github.com/evangraaff/bootstrap-gap.git
+    mk-bootstrap https://github.com/geometrybase/mk-bootstrap.git
+the very first result shows a URL to the official Bootstrap source code
+on GitHub. The string preceding that URL is the name you need to use in 
+your Bowerfile to bring down that asset.    
+
+Create login/install-bootstrap/shine/Bowerfile
+  asset 'bootstrap-sass-official'
+$ bundle exec rake bower:install
+bower.js files generated
+/home/ubuntu/.nvm/versions/node/v4.7.3/bin/bower install -p 
+bower bootstrap-sass-official#*       not-cached https://github.com/twbs/bootstrap-sass.git#*
+bower bootstrap-sass-official#*          resolve https://github.com/twbs/bootstrap-sass.git#*
+bower bootstrap-sass-official#*         download https://github.com/twbs/bootstrap-sass/archive/v3.3.7.tar.gz
+bower bootstrap-sass-official#*          extract archive.tar.gz
+bower bootstrap-sass-official#*         resolved https://github.com/twbs/bootstrap-sass.git#3.3.7
+bower jquery#1.9.1 - 3                not-cached https://github.com/jquery/jquery-dist.git#1.9.1 - 3
+bower jquery#1.9.1 - 3                   resolve https://github.com/jquery/jquery-dist.git#1.9.1 - 3
+bower jquery#1.9.1 - 3                  download https://github.com/jquery/jquery-dist/archive/3.2.0.tar.gz
+bower jquery#1.9.1 - 3                   extract archive.tar.gz
+bower jquery#1.9.1 - 3                  resolved https://github.com/jquery/jquery-dist.git#3.2.0
+bower bootstrap-sass-official#*          install bootstrap-sass-official#3.3.7
+bower jquery#1.9.1 - 3                   install jquery#3.2.0
+bootstrap-sass-official#3.3.7 bower_components/bootstrap-sass-official
+└── jquery#3.2.0
+jquery#3.2.0 bower_components/jquery  
+--------------- Add Bootstrap to Our Asset Pipeline ---------------
+The Rails asset pipeline manages the deployment of front-end assets to a user’s browser.
+The Rails asset pipeline packages the files in app/assets/stylesheets and app/assets/javascripts 
+as application.css and application.js, respectively. 
+The Railsasset pipeline (which is powered by sprockets17) configured with asset paths that 
+contain directives, Much like how we piece together a Ruby application by setting paths and using require
+login/install-bootstrap/shine/app/assets/stylesheets/application.css 
+/* *= require_tree . 
+*= require_self 
+*= require 'bootstrap-sass-official'➤ *
+/
+$ rails s -b $IP -p $PORT
+you’ll see that the font has changed from your browser’s default (likely Times New Roman)
+to Helvetica, which is what Bootstrap uses by default.
+If you view the source being served, you’ll see that our application has picked up the assets 
+in vendor/assets/bower_components/bootstrap-sass-official. 
+<html>
+<head>
+  <title>Shine</title>
+  <link rel="stylesheet" media="all" href="/assets/application.self-d885a0a66bd595c10edb24f8879f94e334d88be0730c4d7c7a7b57c731c09037.css?body=1" />
+<link rel="stylesheet" media="all" href="/assets/bootstrap-sass-official/assets/stylesheets/_bootstrap.self-
+-------------------------------------------------------------

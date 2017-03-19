@@ -41,3 +41,4 @@ group :development do
 end
 
 gem 'devise'
+gem 'bower-rails'

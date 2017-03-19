@@ -201,4 +201,40 @@ in vendor/assets/bower_components/bootstrap-sass-official.
   <title>Shine</title>
   <link rel="stylesheet" media="all" href="/assets/application.self-d885a0a66bd595c10edb24f8879f94e334d88be0730c4d7c7a7b57c731c09037.css?body=1" />
 <link rel="stylesheet" media="all" href="/assets/bootstrap-sass-official/assets/stylesheets/_bootstrap.self-
--------------------------------------------------------------
+----------------------------Above: 3rd commit ---------------------------------
+==== Styling the Login and Registration Forms  =====
+what Bootstrap does requires us to add classes to certain elements in a particular way. 
+This means we’ll need access to the markup before we get started. 
+and, markup for our login screens—they were all provided by Devise, so let's extract those views 
+into our application,allowing us to modify them
+$ bundle exec rails generate devise:views
+Expected string default value for '--test-framework'; got false (boolean)
+Expected boolean default value for '--markerb'; got :erb (string)
+      invoke  Devise::Generators::SharedViewsGenerator
+      create    app/views/devise/shared
+      create    app/views/devise/shared/_links.html.erb
+      invoke  form_for
+      create    app/views/devise/confirmations
+      create    app/views/devise/confirmations/new.html.erb
+      create    app/views/devise/passwords
+      create    app/views/devise/passwords/edit.html.erb
+      create    app/views/devise/passwords/new.html.erb
+      create    app/views/devise/registrations
+      create    app/views/devise/registrations/edit.html.erb
+      create    app/views/devise/registrations/new.html.erb
+      create    app/views/devise/sessions
+      create    app/views/devise/sessions/new.html.erb
+      create    app/views/devise/unlocks
+      create    app/views/devise/unlocks/new.html.erb
+      invoke  erb
+      create    app/views/devise/mailer
+      create    app/views/devise/mailer/confirmation_instructions.html.erb
+      create    app/views/devise/mailer/password_change.html.erb
+      create    app/views/devise/mailer/reset_password_instructions.html.erb
+      create    app/views/devise/mailer/unlock_instructions.html.erb
+Now that we can edit these files, we can use Bootstrap’s CSS classes to make them 
+look how we’d like.       
+1st, add "<%= link_to "Log Out", destroy_user_session_path, method: :delete %> "
+into shine/app/views/dashboard/index.html.erb
+to log ourselves out so we can see & style both the login screen and the registration screen
+ebook page 17...

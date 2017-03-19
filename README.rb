@@ -78,5 +78,19 @@ $ bundle exec rake db:create
 $ bundle exec rake db:migrate 
 $ rails s -b $IP -p $PORT
 ---> see "rails welcome page" on https://ucast-timchen7.c9users.io/ OK!!!
-
- 
+===================== above: 1st commit ===============================
+edit login/create-dashboard/shine/config/routes.rb 
+  root 'dashboard#index'
+create app/controllers/dashboard_controller.rb.
+create app/views/dashboard/index.html.erb
+install Devise gem :
+  gem 'devise'
+$ bundle exec rails generate devise:install 
+  create config/initializers/devise.rb 
+  create config/locales/devise.en.yml
+$ bundle exec rails generate devise user 
+  invoke active_record 
+  create db/migrate/20150228234349_devise_create_users.rb 
+  create app/models/user.rb 
+  insert app/models/user.rb 
+    route devise_for :users

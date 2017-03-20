@@ -286,3 +286,14 @@ shine_development=> \l
 shine_development=> \q
 $ rake db:rollback
 $ rake db:migrate
+============p.32 Next: Using Postgres Indexes to Speed Up a Fuzzy Search ========
+CHAPTER 3 Use Fast Queries with Advanced Postgres Indexes
+use a gem called faker,1 which is typically used to create test data. 
+gem 'faker'
+$ bundle install
+We’ll create this data by writing a small script in db/seeds.rb. 
+Rails’s seed data2 feature is intended to prepopulate a fresh database 
+with reference data
+$ bundle exec rake db:seed 
+
+

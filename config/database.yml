@@ -21,11 +21,12 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   # host: https://ucast-timchen7.c9users.io/
   host: localhost
+  # host:  https://ucast-timchen7.c9users.io/
   username: shine
   password: shine
   # username: ubuntu
   # password: password
-  pool: 5
+  pool: 5432
 
  # Important configs for cloud9, change password value
   # to what you entered in the previous psql step.

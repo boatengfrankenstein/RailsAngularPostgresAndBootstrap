@@ -237,4 +237,52 @@ look how we’d like.
 1st, add "<%= link_to "Log Out", destroy_user_session_path, method: :delete %> "
 into shine/app/views/dashboard/index.html.erb
 to log ourselves out so we can see & style both the login screen and the registration screen
-ebook page 17...
+ebook page 17...23
+================= Next: Using Postgres to Make Our Login More Secure =====================
+-------------- Chapter2:Secure the Login Database with Postgres Constraints---------------
+$ bundle exec rails g migration add-email-constraint-to-users 
+------------ Next: Using Postgres Indexes to Speed Up a Fuzzy Search ------------------
+--------- CHAPTER 3 Use Fast Queries with Advanced Postgres Indexes ----------------
+$ bundle exec rails g model customer first_name:string last_name:string email:string username:string
+
+!!!!!!! ERROR !!!!!!!!!!!!!
+http://stackoverflow.com/questions/28925848/error-with-postgresql-datababse-is-the-server-running-locally-and-accepting-co
+Q: psql: could not connect to server: 
+   No such file or directory Is the server running locally and accepting connections 
+   on Unix domain socket "/var/run/postgresql/.s.PGSQL.5432"?
+A: even though there is clearly a socket with this path available as reported by 
+   netstat -lp --protocol=unix | grep postgres
+   The problem can be solved by removing the lock file and restarting postgresql. 
+   This is definitely less invasive than a purge and re-install.
+   $ sudo rm /var/run/postgresql/.s.PGSQL.5432.lock 
+   $ sudo service postgresql restart
+=============== !! ERROR!!!! ==============
+Question:
+timchen7:~/shine (master) $ bundle exec rake db:drop
+PG::InsufficientPrivilege: ERROR:  must be owner of database shine_development
+: DROP DATABASE IF EXISTS "shine_development"
+Answer:
+http://stackoverflow.com/questions/7210563/rake-aborted-error-must-be-owner-of-database
+Did you ensure the ownership of the test DB? try running the \l command on Postgres console client and check the ownerships.
+timchen7:~/shine (master) $ rails db
+Password: 
+psql (9.3.15)
+SSL connection (cipher: DHE-RSA-AES256-GCM-SHA384, bits: 256)
+Type "help" for help.
+
+shine_development=> \l
+                                 List of databases
+       Name        |  Owner   | Encoding  | Collate | Ctype |   Access privileges   
+-------------------+----------+-----------+---------+-------+-----------------------
+ postgres          | postgres | SQL_ASCII | C       | C     | 
+ shine_development | ubuntu   | UTF8      | C       | C     | 
+ shine_test        | ubuntu   | UTF8      | C       | C     | 
+ template0         | postgres | SQL_ASCII | C       | C     | =c/postgres          +
+                   |          |           |         |       | postgres=CTc/postgres
+ template1         | postgres | SQL_ASCII | C       | C     | =c/postgres          +
+                   |          |           |         |       | postgres=CTc/postgres
+ ubuntu            | ubuntu   | SQL_ASCII | C       | C     | 
+(6 rows)
+shine_development=> \q
+$ rake db:rollback
+$ rake db:migrate

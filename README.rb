@@ -379,3 +379,27 @@ $rails s -b $IP-p $PORT
 Hello, chen
 Name  
 chen
+================= p.65 Porting Our Search to Angular ==========================
+We’ll
+(A)write JavaScript code that grabs the search term the user entered, 
+(B)submits an Ajax request to the server, 
+(C)receives a JSON response, and 
+(D)updates the DOM with the results of the search, 
+all without the page reloading. 
+i.e.
+(a) Angularize our view by removing all the Rails helpers and 
+adding some Angular-specific attributes 
+(b) write some JavaScript that shows us how to respond to a click event. 
+(c)update that JavaScript to put canned data into the view when the user 
+does a search -- this will demonstrate how we can manipulate the DOM. 
+(e)change our code to get real results from the server by making an Ajax call.
+-------Angularizing Our View --------
+We’ll use an article element to wrap the markup in app/views/customers/index.html.erb 
+and to hold the ng-app and ng-controller directives. 
+<article ng-app="customers" ng-controller="CustomerSearchController"> 
+<!-- rest of the existing markup --> 
+</article>
+-------Creating Our First Angular Controller ----
+Now we can use Angular directives to access data from form elements, 
+Next, we need to render a list of results in our view. 
+use Ajax requests and JSON responses from the server

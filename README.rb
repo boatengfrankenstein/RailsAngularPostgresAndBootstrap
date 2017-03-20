@@ -320,3 +320,62 @@ CHAPTER 4 Create Clean Search Results with Bootstrap Components
 Adding Pagination Controls to the View 
 To style the previous/next links, Bootstrap provides a component called a pager. 
 Next: Angular!
+================= Deploy to Heroku =====================
+$git add .
+$git commit -m "Paginating the Search Results Using Bootstrap"
+$ heroku create ushine
+$ git push heroku master
+$ heroku run rake db:migrate
+$ heroku run rake db:seed
+$ heroku open
+======================!!! ANGULAR.JS!!! ========================
+p.61 CHAPTER 5 Build a Dynamic UI with AngularJS
+set up Angular and learn how it works by implementing a “typeahead” 
+search. Instead of requiring our users to type a search term and 
+click a search button, we’ll fetch results in real time, as they type.
+(perform an asynchronous search as the user types, by listening for 
+the right DOM events and using Angular’s Ajax features. )
+Let's install Angular using Bower, and arrange for Angular’s code to be 
+served up by the Rails' asset pipeline
+(1) edit .../shine/Bowerfile :
+asset 'bootstrap-sass-official' 
+# START_HIGHLIGHT 
+# END_HIGHLIGHT 
+asset 'angular', '~> 1.5' 
+resolution 'angular', '1.5'
+(2) Next, we’ll install it using the rake task provided by bower-rails.
+$ bundle exec rake bower:install
+timchen7:~/shine (master) $ bundle exec rake bower:install
+bower.js files generated
+/home/ubuntu/.nvm/versions/node/v4.7.3/bin/bower install -p 
+bower angular#~> 1.5        not-cached https://github.com/angular/bower-angular.git#~> 1.5
+bower angular#~> 1.5           resolve https://github.com/angular/bower-angular.git#~> 1.5
+bower angular#~> 1.5          download https://github.com/angular/bower-angular/archive/v1.5.11.tar.gz
+bower angular#~> 1.5           extract archive.tar.gz
+bower angular#~> 1.5          resolved https://github.com/angular/bower-angular.git#1.5.11
+bower angular         extra-resolution Unnecessary resolution: angular#1.5
+bower angular#~> 1.5           install angular#1.5.11
+
+angular#1.5.11 bower_components/angular 
+(3)With Angular installed, we need to bring it into the asset pipeline by adding it to 
+app/assets/javascripts/application.js.
+//= require jquery 
+//= require jquery_ujs 
+//= require angular
+//= require_tree
+(4)
+typeahead/install-angular/shine/config/routes.rb 
+get "angular_test", to: "angular_test#index" 
+Then we create AngularTestController to serve up the index action.
+typeahead/install-angular/shine/app/controllers/angular_test_controller.rb 
+class AngularTestController < ApplicationController 
+  def index 
+  end 
+end
+edit index.html.rb..
+typeahead/install-angular/shine/app/assets/javascripts/angular_test_app.js 
+angular.module('angular_test',[ ])
+$rails s -b $IP-p $PORT
+Hello, chen
+Name  
+chen

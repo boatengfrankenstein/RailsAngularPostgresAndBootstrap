@@ -316,4 +316,7 @@ features via execute, even if they aren’t baked directly into the Active Recor
 ============= p.50 : Next: Better-Looking Results with Bootstrap’s List Group ====
 CHAPTER 4 Create Clean Search Results with Bootstrap Components
 --using Bootstrap’s list group, its typographic styles, and CSS floats
-
+-----p.57 Paginating the Results Using Bootstrap’s Components -----
+Adding Pagination Controls to the View 
+To style the previous/next links, Bootstrap provides a component called a pager. 
+Next: Angular!

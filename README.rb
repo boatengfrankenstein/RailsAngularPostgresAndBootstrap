@@ -313,5 +313,7 @@ timchen7:~/shine (master) $ bundle exec rake db:migrate
 Now  we can see that the results are about 50 times faster
 Postgres has many advanced features. Fortunately, Rails makes it easy for us to use these 
 features via execute, even if they aren’t baked directly into the Active Record API.
-
+============= p.50 : Next: Better-Looking Results with Bootstrap’s List Group ====
+CHAPTER 4 Create Clean Search Results with Bootstrap Components
+--using Bootstrap’s list group, its typographic styles, and CSS floats
 

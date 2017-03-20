@@ -295,5 +295,23 @@ We’ll create this data by writing a small script in db/seeds.rb.
 Rails’s seed data2 feature is intended to prepopulate a fresh database 
 with reference data
 $ bundle exec rake db:seed 
+============ p.39: Implementing the Search Logic =================
+$ bundle exec rails g migration add-lower-indexes-to-customers 
+timchen7:~/shine (master) $ bundle exec rails g migration add-lower-indexes-to-customers 
+Expected string default value for '--test-framework'; got false (boolean)
+      invoke  active_record
+      create    db/migrate/20170320035754_add_lower_indexes_to_customers.rb
+timchen7:~/shine (master) $ bundle exec rake db:migrate                                                                                 
+== 20170320035754 AddLowerIndexesToCustomers: migrating =======================
+-- execute(" \n      CREATE INDEX \n        customers_lower_last_name \n      ON \n        customers (lower(last_name) varchar_pattern_ops) \n    ")
+   -> 0.0067s
+-- execute(" \n      CREATE INDEX \n        customers_lower_first_name \n      ON \n        customers (lower(first_name) varchar_pattern_ops) \n    ")
+   -> 0.0039s
+-- execute(" \n      CREATE INDEX \n        customers_lower_email \n      ON \n        customers (lower(email)) \n    ")
+   -> 0.0042s
+== 20170320035754 AddLowerIndexesToCustomers: migrated (0.0151s) =============
+Now  we can see that the results are about 50 times faster
+Postgres has many advanced features. Fortunately, Rails makes it easy for us to use these 
+features via execute, even if they aren’t baked directly into the Active Record API.
 
 
